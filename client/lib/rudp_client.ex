@@ -14,19 +14,13 @@ defmodule RudpClient do
         Supervisor.start_link(children, opts)
     end
 
-    def start_client(address, port, client_id) do
+    def start_client(client_id, address \\ "127.0.0.1", port \\ Application.get_env(:rudp_client, :udp_port)) do
         RudpClient.Worker.Supervisor.start_child(address, port, client_id)
     end
 
-    def start_client(client_id) do
-        address = "127.0.0.1"
-        port = Application.get_env(:rudp_client, :udp_port)
-        start_client(address, port, client_id)
-    end
-
-    def start_clients(nb_clients) do
+    def start_clients(nb_clients, address \\ "127.0.0.1", port \\ Application.get_env(:rudp_client, :udp_port)) do
         Enum.each(1..nb_clients, fn(client_id) ->
-            {:ok, client} = start_client(client_id)
+            {:ok, client} = start_client(client_id, address, port)
             initial_delay = Enum.random(50..300)
             RudpClient.Worker.start_ping(client, initial_delay)
         end)

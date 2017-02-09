@@ -23,9 +23,14 @@ To run the client:
 > iex -S mix
 ```
 
-To start N clients, issue the following in the iex shell:
+To start N clients (connecting to localhost:4055), issue the following in the iex shell:
 ```
 iex(1)> RudpClient.start_clients(100)
+```
+
+To start N clients connecting to a specific IP address / port, issue the following in the iex shell:
+```
+iex(1)> RudpClient.start_clients(100, "127.0.0.1", 4055)
 ```
 
 To see the statistics, issue the following in the iex shell:
