@@ -1,0 +1,13 @@
+# Mix / Elixir
+_build/
+cover/
+deps/
+erl_crash.dump
+*.ez
+
+# IntelliiJ IDEA
+.idea/
+*.iml
+
+# Local logging files
+log/
